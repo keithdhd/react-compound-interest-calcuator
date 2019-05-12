@@ -19,6 +19,7 @@ npm test
 
 ```
 cd frontend
+npm install
 npm start
 
 // New tab
