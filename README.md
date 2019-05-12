@@ -6,3 +6,25 @@ __DISCLAIMER__: Please don't use these figures to calculate your financial futur
 
 ![Compound Interest Calculator](https://github.com/keithdhd/react-compound-interest-calcuator/blob/master/images/compound_interest_screenshot.png)
 
+## Installation
+
+```
+cd backend
+npm install
+npm start
+
+// New tab
+npm test
+```
+
+```
+cd frontend
+npm start
+
+// New tab
+npm test
+```
+
+
+
+
