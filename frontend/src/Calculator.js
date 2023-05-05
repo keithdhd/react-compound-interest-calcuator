@@ -17,7 +17,7 @@ class Calculator extends Component {
 
   fetchResult(data) {
     const request = new RequestHelper(
-      "http://localhost:3000/api/results/compound"
+      "http://localhost:9000/api/results/compound"
     );
 
     const payload = this.createPayload(data);

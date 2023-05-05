@@ -3,8 +3,9 @@ class Calculator {
     baseAmount,
     annualInterest,
     calculationPeriod,
-    monthlyContribution
+    monthlyContribution = 0
   }) {
+
     annualInterest /= 100;
     const monthlyRate = annualInterest / 12;
     const monthsToGrow = calculationPeriod * 12;

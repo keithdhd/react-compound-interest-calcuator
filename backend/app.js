@@ -4,10 +4,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var cors = require('cors');
-
-var calculatorRouter = require('./routes/calculators');
-
 var app = express();
+var calculatorRouter = require('./routes/calculators');
 
 app.use(bodyParser.json());
 app.use(cors());

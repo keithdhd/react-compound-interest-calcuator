@@ -6,10 +6,7 @@ function Result(props) {
       <i className="money bill alternate outline icon" />
       <div className="content">
         <h1 id="result">
-          {new Intl.NumberFormat("us-ENG", {
-            style: "currency",
-            currency: "GBP"
-          }).format(props.result)}
+          {new Intl.NumberFormat("en-GB", { style: 'currency', currency: 'GBP' }).format(props.result)}
         </h1>
       </div>
     </div>
