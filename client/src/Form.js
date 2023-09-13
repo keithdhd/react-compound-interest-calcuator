@@ -45,21 +45,19 @@ const Form = ({ calculateResult }) => {
 
   return (
     <form id="calculator-form" className="ui huge form" onSubmit={handleSubmit}>
-      <div className="three fields">
-        <BaseAmount
-          value={baseAmount}
-          handleBaseAmountChange={handleBaseAmountChange}
-        />
-        <AnnualInterest
-          value={annualInterest}
-          handleInterestChange={handleInterestChange}
-        />
-        <TimePeriod
-          value={timePeriod}
-          errors={timePeriodErrors}
-          handleTimePeriodChange={handleTimePeriodChange}
-        />
-      </div>
+      <BaseAmount
+        value={baseAmount}
+        handleBaseAmountChange={handleBaseAmountChange}
+      />
+      <AnnualInterest
+        value={annualInterest}
+        handleInterestChange={handleInterestChange}
+      />
+      <TimePeriod
+        value={timePeriod}
+        errors={timePeriodErrors}
+        handleTimePeriodChange={handleTimePeriodChange}
+      />
       <CalculateButton reset={reset} />
     </form>
   );

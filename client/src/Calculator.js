@@ -19,7 +19,7 @@ const Calculator = () => {
 
   return (
     <Wrapper>
-      <h3>Compound Interest Calculator</h3>
+      <h1>Compound Interest Calculator</h1>
       <hr />
       <Form calculateResult={calculateResult} />
       <Result result={result} />
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  width: 500px;
+  width: 450px;
   margin: 40px auto;
   padding: 20px;
 
