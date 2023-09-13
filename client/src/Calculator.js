@@ -1,47 +1,45 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import Form from "./Form";
 import Result from "./Result";
 import RequestHelper from "./helpers/request_helper";
 
-class Calculator extends Component {
-  constructor(props) {
-    super(props);
+const Calculator = () => {
+  const [result, setResult] = useState(null);
 
-    this.state = {
-      result: null,
-    };
-
-    this.fetchResult = this.fetchResult.bind(this);
-  }
-
-  fetchResult(data) {
+  const fetchResult = (data) => {
     const request = new RequestHelper(
       "http://localhost:9000/api/results/compound"
     );
 
-    const payload = this.createPayload(data);
+    const createPayload = (obj) => {
+      return {
+        baseAmount: Number(obj.baseAmount),
+        annualInterest: Number(obj.annualInterest),
+        calculationPeriod: Number(obj.timePeriod),
+      };
+    };
+
+    const payload = createPayload(data);
 
     request.post(payload).then((res) => {
-      this.setState({ result: res });
+      setResult({ result: res });
     });
-  }
+  };
 
-  createPayload(obj) {
-    return {
-      baseAmount: Number(obj.baseAmount),
-      annualInterest: Number(obj.annualInterest),
-      calculationPeriod: Number(obj.timePeriod),
-    };
-  }
+  return (
+    <Wrapper>
+      <Form fetchResult={fetchResult} />
+      <Result result={result} />
+    </Wrapper>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <Form fetchResult={this.fetchResult} />
-        <Result result={this.state.result} />
-      </>
-    );
-  }
-}
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+`;
 
 export default Calculator;

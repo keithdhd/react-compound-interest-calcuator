@@ -1,8 +1,6 @@
 import React from "react";
 
-function TimePeriod(props) {
-  const { errors } = props;
-
+const TimePeriod = ({ errors, value, handleTimePeriodChange }) => {
   const errorMessages = errors.map((error, index) => {
     return (
       <div key={index} className="ui error visible message">
@@ -18,12 +16,12 @@ function TimePeriod(props) {
         type="number"
         min="1"
         id="timePeriod"
-        value={props.value}
-        onChange={props.handleTimePeriodChange}
+        value={value}
+        onChange={handleTimePeriodChange}
       />
       {errorMessages}
     </div>
   );
-}
+};
 
 export default TimePeriod;

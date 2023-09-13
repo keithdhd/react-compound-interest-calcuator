@@ -1,6 +1,6 @@
 import React from "react";
 
-function CalculateButton(props) {
+const CalculateButton = () => {
   return (
     <input
       type="submit"
@@ -9,6 +9,6 @@ function CalculateButton(props) {
       value="Calculate"
     />
   );
-}
+};
 
 export default CalculateButton;

@@ -1,78 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import BaseAmount from "./BaseAmount";
 import AnnualInterest from "./AnnualInterest";
 import TimePeriod from "./TimePeriod";
 import CalculateButton from "./CalculateButton";
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      baseAmount: "",
-      annualInterest: "",
-      timePeriod: "",
-      timePeriodErrors: [],
-    };
+const Form = ({ fetchResult }) => {
+  const [baseAmount, setBaseAmount] = useState("");
+  const [annualInterest, setAnnualInterest] = useState("");
+  const [timePeriod, setTimePeriod] = useState("");
+  const [timePeriodErrors, setTimePeriodErrors] = useState([]);
 
-    this.handleBaseAmountChange = this.handleBaseAmountChange.bind(this);
-    this.handleInterestChange = this.handleInterestChange.bind(this);
-    this.handleTimePeriodChange = this.handleTimePeriodChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchResult({
+      baseAmount,
+      annualInterest,
+      timePeriod,
+      timePeriodErrors,
+    });
+  };
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.fetchResult(this.state);
-  }
+  const handleBaseAmountChange = (e) => {
+    setBaseAmount(e.target.value);
+  };
 
-  handleBaseAmountChange(event) {
-    this.setState({ baseAmount: event.target.value });
-  }
+  const handleInterestChange = (e) => {
+    setAnnualInterest(e.target.value);
+  };
 
-  handleInterestChange(event) {
-    this.setState({ annualInterest: event.target.value });
-  }
-
-  handleTimePeriodChange(evt) {
+  const handleTimePeriodChange = (e) => {
     const errors = [];
-    const time = evt.target.value;
+    const time = e.target.value;
 
-    if (Number(evt.target.value) === 0) {
+    if (Number(e.target.value) === 0) {
       errors.push("Years to grow must be above zero.");
     }
 
-    this.setState((state, props) => ({
-      timePeriod: time,
-      timePeriodErrors: errors,
-    }));
-  }
+    setTimePeriod(time);
+    setTimePeriodErrors(errors);
+  };
 
-  render() {
-    return (
-      <form
-        id="calculator-form"
-        className="ui form"
-        onSubmit={this.handleSubmit}
-      >
-        <div className="three fields">
-          <BaseAmount
-            value={this.state.baseAmount}
-            handleBaseAmountChange={this.handleBaseAmountChange}
-          />
-          <AnnualInterest
-            value={this.state.annualInterest}
-            handleInterestChange={this.handleInterestChange}
-          />
-          <TimePeriod
-            value={this.state.timePeriod}
-            errors={this.state.timePeriodErrors}
-            handleTimePeriodChange={this.handleTimePeriodChange}
-          />
-        </div>
-        <CalculateButton />
-      </form>
-    );
-  }
-}
+  return (
+    <form id="calculator-form" className="ui form" onSubmit={handleSubmit}>
+      <div className="three fields">
+        <BaseAmount
+          value={baseAmount}
+          handleBaseAmountChange={handleBaseAmountChange}
+        />
+        <AnnualInterest
+          value={annualInterest}
+          handleInterestChange={handleInterestChange}
+        />
+        <TimePeriod
+          value={timePeriod}
+          errors={timePeriodErrors}
+          handleTimePeriodChange={handleTimePeriodChange}
+        />
+      </div>
+      <CalculateButton />
+    </form>
+  );
+};
 
 export default Form;
