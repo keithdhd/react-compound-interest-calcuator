@@ -9,6 +9,8 @@ function AnnualInterest({ value, handleInterestChange }) {
         id="annualInterest"
         value={value}
         onChange={handleInterestChange}
+        placeholder={5}
+        required
       />
     </div>
   );

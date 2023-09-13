@@ -2,34 +2,26 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Form from "./Form";
 import Result from "./Result";
-import RequestHelper from "./helpers/request_helper";
+import calculateCompoundInterest from "./lib/calculator";
 
 const Calculator = () => {
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState(0);
 
-  const fetchResult = (data) => {
-    const request = new RequestHelper(
-      "http://localhost:9000/api/results/compound"
+  const calculateResult = (baseAmount, annualInterest, timePeriod) => {
+    const res = calculateCompoundInterest(
+      Number(baseAmount),
+      Number(annualInterest),
+      Number(timePeriod)
     );
 
-    const createPayload = (obj) => {
-      return {
-        baseAmount: Number(obj.baseAmount),
-        annualInterest: Number(obj.annualInterest),
-        calculationPeriod: Number(obj.timePeriod),
-      };
-    };
-
-    const payload = createPayload(data);
-
-    request.post(payload).then((res) => {
-      setResult({ result: res });
-    });
+    setResult(res);
   };
 
   return (
     <Wrapper>
-      <Form fetchResult={fetchResult} />
+      <h3>Compound Interest Calculator</h3>
+      <hr />
+      <Form calculateResult={calculateResult} />
       <Result result={result} />
     </Wrapper>
   );
@@ -38,8 +30,15 @@ const Calculator = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  margin: 0 auto;
+  align-items: center;
+
+  width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+
+  background-color: #e6e6e6;
+
+  border-radius: 5px;
 `;
 
 export default Calculator;

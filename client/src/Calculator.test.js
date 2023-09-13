@@ -1,9 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Calculator from "./Calculator";
-import { render, fireEvent, cleanup, wait } from "react-testing-library";
-
-afterEach(cleanup);
+// import react-testing methods
+import { render, fireEvent, screen } from "@testing-library/react";
 
 describe("Calculator", () => {
   // Renders without crashing
@@ -13,8 +11,7 @@ describe("Calculator", () => {
 
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Calculator />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<Calculator />, div);
   });
 
   it("doesn't allow for 0 years growth", () => {
@@ -44,7 +41,7 @@ describe("Calculator", () => {
 
     fireEvent.click(btn);
 
-    // Assert
-    await wait(() => getByText("£181,939.67"));
+    //   // Assert
+    expect(getByText("£181,939.67"));
   });
 });

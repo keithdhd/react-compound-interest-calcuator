@@ -18,6 +18,8 @@ const TimePeriod = ({ errors, value, handleTimePeriodChange }) => {
         id="timePeriod"
         value={value}
         onChange={handleTimePeriodChange}
+        placeholder={5}
+        required
       />
       {errorMessages}
     </div>

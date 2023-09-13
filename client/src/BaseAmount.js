@@ -9,6 +9,9 @@ const BaseAmount = ({ value, handleBaseAmountChange }) => {
         id="baseAmount"
         value={value}
         onChange={handleBaseAmountChange}
+        placeholder={5000}
+        autoFocus
+        required
       />
     </div>
   );

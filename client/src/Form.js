@@ -4,20 +4,15 @@ import AnnualInterest from "./AnnualInterest";
 import TimePeriod from "./TimePeriod";
 import CalculateButton from "./CalculateButton";
 
-const Form = ({ fetchResult }) => {
-  const [baseAmount, setBaseAmount] = useState("");
-  const [annualInterest, setAnnualInterest] = useState("");
-  const [timePeriod, setTimePeriod] = useState("");
+const Form = ({ calculateResult }) => {
+  const [baseAmount, setBaseAmount] = useState(5000);
+  const [annualInterest, setAnnualInterest] = useState(5);
+  const [timePeriod, setTimePeriod] = useState(5);
   const [timePeriodErrors, setTimePeriodErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchResult({
-      baseAmount,
-      annualInterest,
-      timePeriod,
-      timePeriodErrors,
-    });
+    calculateResult(baseAmount, annualInterest, timePeriod, timePeriodErrors);
   };
 
   const handleBaseAmountChange = (e) => {
@@ -32,7 +27,7 @@ const Form = ({ fetchResult }) => {
     const errors = [];
     const time = e.target.value;
 
-    if (Number(e.target.value) === 0) {
+    if (Number(e.target.value) <= 0) {
       errors.push("Years to grow must be above zero.");
     }
 
@@ -40,8 +35,16 @@ const Form = ({ fetchResult }) => {
     setTimePeriodErrors(errors);
   };
 
+  const reset = () => {
+    setBaseAmount("");
+    setAnnualInterest("");
+    setTimePeriod("");
+    setTimePeriodErrors([]);
+    calculateResult(0, 0, 0, 0);
+  };
+
   return (
-    <form id="calculator-form" className="ui form" onSubmit={handleSubmit}>
+    <form id="calculator-form" className="ui huge form" onSubmit={handleSubmit}>
       <div className="three fields">
         <BaseAmount
           value={baseAmount}
@@ -57,7 +60,7 @@ const Form = ({ fetchResult }) => {
           handleTimePeriodChange={handleTimePeriodChange}
         />
       </div>
-      <CalculateButton />
+      <CalculateButton reset={reset} />
     </form>
   );
 };
