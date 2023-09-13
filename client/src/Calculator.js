@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Calculator.css";
 import Form from "./Form";
 import Result from "./Result";
 import RequestHelper from "./helpers/request_helper";
@@ -9,7 +8,7 @@ class Calculator extends Component {
     super(props);
 
     this.state = {
-      result: null
+      result: null,
     };
 
     this.fetchResult = this.fetchResult.bind(this);
@@ -22,7 +21,7 @@ class Calculator extends Component {
 
     const payload = this.createPayload(data);
 
-    request.post(payload).then(res => {
+    request.post(payload).then((res) => {
       this.setState({ result: res });
     });
   }
@@ -31,16 +30,16 @@ class Calculator extends Component {
     return {
       baseAmount: Number(obj.baseAmount),
       annualInterest: Number(obj.annualInterest),
-      calculationPeriod: Number(obj.timePeriod)
+      calculationPeriod: Number(obj.timePeriod),
     };
   }
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Form fetchResult={this.fetchResult} />
         <Result result={this.state.result} />
-      </React.Fragment>
+      </>
     );
   }
 }

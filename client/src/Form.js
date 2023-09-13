@@ -11,7 +11,7 @@ class Form extends React.Component {
       baseAmount: "",
       annualInterest: "",
       timePeriod: "",
-      timePeriodErrors: []
+      timePeriodErrors: [],
     };
 
     this.handleBaseAmountChange = this.handleBaseAmountChange.bind(this);
@@ -43,7 +43,7 @@ class Form extends React.Component {
 
     this.setState((state, props) => ({
       timePeriod: time,
-      timePeriodErrors: errors
+      timePeriodErrors: errors,
     }));
   }
 
@@ -51,7 +51,7 @@ class Form extends React.Component {
     return (
       <form
         id="calculator-form"
-        className="ui inverted form"
+        className="ui form"
         onSubmit={this.handleSubmit}
       >
         <div className="three fields">
