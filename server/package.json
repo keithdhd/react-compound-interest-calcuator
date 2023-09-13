@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "start": "node ./bin/www",
-    "dev run": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
